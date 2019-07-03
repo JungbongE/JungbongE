@@ -1,0 +1,26 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(string arrangement) {
+    int answer = 0;
+    int countFloor = 0;
+    int i = 0;
+    char c;
+    char prevc = '0';
+    while(i < arrangement.size()) {
+        c = arrangement.at(i++);
+        if(c == '(' && prevc == c) countFloor++;
+        else if(c == ')') {
+            if(prevc != c) answer += countFloor;
+            if(prevc == c) {
+                countFloor--;
+                answer++;
+            }
+        }
+        else return -1;
+        prevc = c;
+    }
+    return answer;
+}
